@@ -8,6 +8,7 @@ db.sqlite3
 markdownx/*.jpg
 markdownx/*.png
 markdownx/*.webp
+
 static/admin
 static/dicts
 static/markdownx
@@ -15,3 +16,5 @@ static/martor
 static/plugins
 static/rest_framework
 
+staticfiles
+static
