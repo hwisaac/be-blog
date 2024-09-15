@@ -6,8 +6,6 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-TEST = os.getenv("TEST")
-print(TEST)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -174,8 +172,8 @@ MARTOR_ENABLE_LABEL = False
 MARTOR_ENABLE_ADMIN_CSS = True
 
 # Imgur API Keys
-MARTOR_IMGUR_CLIENT_ID = "your-client-id"
-MARTOR_IMGUR_API_KEY = "your-api-key"
+MARTOR_IMGUR_CLIENT_ID = os.getenv("MARTOR_IMGUR_CLIENT_ID")
+MARTOR_IMGUR_API_KEY = os.getenv("MARTOR_IMGUR_API_KEY")
 
 # Markdownify
 MARTOR_MARKDOWNIFY_FUNCTION = "martor.utils.markdownify"  # default

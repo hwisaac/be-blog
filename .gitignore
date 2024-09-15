@@ -1,6 +1,7 @@
 */__pycache__/
 */*/__pycache__/
 */migrations/*.pyc
+*/migrations/*.py
 
 .env
 db.sqlite3
@@ -13,3 +14,4 @@ static/markdownx
 static/martor
 static/plugins
 static/rest_framework
+
