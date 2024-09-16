@@ -18,3 +18,5 @@ static/rest_framework
 
 staticfiles
 static
+
+logs/*

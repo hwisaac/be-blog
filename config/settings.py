@@ -1,4 +1,5 @@
 import os
+from os.path import join
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -129,6 +130,52 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+####################### logging
+# 로그 파일을 저장할 경로 설정
+LOG_DIR = os.path.join(BASE_DIR, "logs")
+
+# logs 폴더가 없으면 생성
+if not os.path.exists(LOG_DIR):
+    os.makedirs(LOG_DIR)
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "fileFormat": {
+            "format": "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            "datefmt": "%d/%b/%Y %H:%M:%S",
+        }
+    },
+    "handlers": {
+        "file": {
+            "level": "INFO",
+            "class": "logging.handlers.RotatingFileHandler",
+            "maxBytes": 1024 * 1024 * 10,
+            "backupCount": 30,
+            "filename": join(BASE_DIR, "logs/logfile.log"),
+            "formatter": "fileFormat",
+        },
+        "console": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
+        },
+    },
+    "loggers": {
+        "django.request": {
+            "handlers": ["file", "console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "django": {
+            "handlers": ["file", "console"],
+            "level": "DEBUG",
+            "propagate": False,
+        },
+    },
+}
 
 
 ####################### tinymce
