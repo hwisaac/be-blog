@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post
+from .models import Post, Tag
 from django.db import models
 from django.utils.safestring import mark_safe
 from django.urls import reverse
@@ -17,3 +17,9 @@ class PostsAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.TextField: {"widget": TinyMCE()},
     }
+
+
+@admin.register(Tag)
+class PostsAdmin(admin.ModelAdmin):
+    list_display = ("name", "created_at", "updated_at")
+    search_fields = ("name",)

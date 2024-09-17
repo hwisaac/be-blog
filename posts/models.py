@@ -12,6 +12,10 @@ class Tag(CommonModel):
         verbose_name_plural = "태그"
         db_table = "tags"
 
+    def __str__(self):
+        return self.name
+
+
 class Post(CommonModel):
     title = models.CharField(max_length=255, blank=True ,default="")
     slug = models.SlugField(max_length=255, unique=True, blank=True, default="")
