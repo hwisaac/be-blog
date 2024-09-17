@@ -11,7 +11,7 @@ from django import forms
 
 @admin.register(Post)
 class PostsAdmin(admin.ModelAdmin):
-    list_display = ("title", "created_at", "updated_at")
+    list_display = ("title", "updated_at", "views")
     search_fields = ("title",)
 
     formfield_overrides = {

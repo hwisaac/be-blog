@@ -7,7 +7,11 @@ class PostListSerializer(ModelSerializer):
 
     class Meta:
         model = Post
-        exclude = ("content",)
+        exclude = (
+            "content",
+            "related_post_1",
+            "related_post_2",
+        )
 
     def get_tags(self, post):
         tags = post.tags.all()
@@ -23,3 +27,18 @@ class PostDetailSerializer(ModelSerializer):
     def get_tags(self, post):
         tags = post.tags.all()
         return [tag.name for tag in tags]
+
+
+class RelatedPostSerializer(ModelSerializer):
+
+    class Meta:
+        model: Post
+        fields = (
+            "id",
+            "slug",
+            "title",
+            "summary",
+            "thumbnail",
+            "description",
+            "views",
+        )

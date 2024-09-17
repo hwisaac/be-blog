@@ -22,7 +22,7 @@ class PostsAPI(APIView):
         max_page_size = 100
 
     def get(self, request, *args, **kwargs):
-        posts = Post.objects.all().order_by("-updated_at")
+        posts = Post.objects.all().order_by("-created_at")
         # 검색어 필터링 (q 파라미터)
         query = request.query_params.get("q")
         if query:
@@ -71,3 +71,18 @@ class PostDetailAPI(APIView):
         logger.info(f"[PostDetailAPI, GET] slug : {slug}")
         serializer = PostDetailSerializer(post)
         return Response(serializer.data)
+
+
+class IncreasePostViewCountAPIView(APIView):
+    def post(self, request, slug):
+        try:
+            post = Post.objects.get(slug=slug)
+            post.views += 1
+            post.save()
+            return Response(
+                {"message": "View count increased"}, status=status.HTTP_200_OK
+            )
+        except Post.DoesNotExist:
+            return Response(
+                {"error": "Post not found"}, status=status.HTTP_404_NOT_FOUND
+            )
