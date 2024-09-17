@@ -15,6 +15,11 @@ class PostListSerializer(ModelSerializer):
 
 
 class PostDetailSerializer(ModelSerializer):
+    tags = SerializerMethodField()
     class Meta:
         model = Post
         fields = "__all__"
+
+    def get_tags(self, post):
+        tags = post.tags.all()
+        return [tag.name for tag in tags]
