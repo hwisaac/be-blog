@@ -17,9 +17,25 @@ class PostListSerializer(ModelSerializer):
         tags = post.tags.all()
         return [tag.name for tag in tags]
 
+class RelatedPostSerializer(ModelSerializer):
+
+    class Meta:
+        model = Post
+        fields = (
+            "id",
+            "slug",
+            "title",
+            "summary",
+            "thumbnail",
+            "views",
+        )
+
 
 class PostDetailSerializer(ModelSerializer):
     tags = SerializerMethodField()
+    related_post_1 = RelatedPostSerializer()
+    related_post_2 = RelatedPostSerializer()
+
     class Meta:
         model = Post
         fields = "__all__"
@@ -27,18 +43,3 @@ class PostDetailSerializer(ModelSerializer):
     def get_tags(self, post):
         tags = post.tags.all()
         return [tag.name for tag in tags]
-
-
-class RelatedPostSerializer(ModelSerializer):
-
-    class Meta:
-        model: Post
-        fields = (
-            "id",
-            "slug",
-            "title",
-            "summary",
-            "thumbnail",
-            "description",
-            "views",
-        )
