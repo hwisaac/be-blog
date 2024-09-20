@@ -16,7 +16,9 @@ SECRET_KEY = "django-insecure-3@6x=p$r^iy*f%b2n6lif69u(*#j%j7a(y4aqdqf=*witaha0f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "3.39.240.129",
+]
 # Application definition
 
 # This is where static files will be collected
